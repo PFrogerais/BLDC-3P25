@@ -5,7 +5,7 @@ Qty,References,Value,Footprint,MPN / spec
 2,C5 C7,4.7u/25V,Capacitor_SMD:C_0805_2012Metric,
 1,C9,2.2u/25V,Capacitor_SMD:C_0805_2012Metric,
 1,C10,22n/50V,Capacitor_SMD:C_0603_1608Metric,
-2,C11 C12,1u/16V,Capacitor_SMD:C_0603_1608Metric,
+3,C11 C12 C45,1u/16V,Capacitor_SMD:C_0603_1608Metric,
 4,C14 C21 C25 C29,100n/25V,Capacitor_SMD:C_0603_1608Metric,
 2,C15 C16,22u/16V X7R,Capacitor_SMD:C_1206_3216Metric,
 4,C18 C41 C42 C43,4.7n,Capacitor_SMD:C_0603_1608Metric,
@@ -15,7 +15,7 @@ Qty,References,Value,Footprint,MPN / spec
 5,C33 C34 C35 C39 C40,1n,Capacitor_SMD:C_0603_1608Metric,
 1,D1,SMBJ15A,Diode_SMD:D_SMB,SMBJ15A
 1,D2,B240A,Diode_SMD:D_SMA,B240A-13-F
-1,D3,SS14,Diode_SMD:D_SMA,SS14
+2,D3 D8,SS14,Diode_SMD:D_SMA,SS14
 2,D4 D5,BAT54S,Package_TO_SOT_SMD:SOT-23,BAT54S
 1,D6,RED FAULT,LED_SMD:LED_0603_1608Metric,
 1,D7,GREEN 5V,LED_SMD:LED_0603_1608Metric,
@@ -25,6 +25,7 @@ Qty,References,Value,Footprint,MPN / spec
 1,J4,MOTOR_C,Connector_Wire:SolderWire-1.5sqmm_1x01_D1.7mm_OD3.9mm,
 1,J5,HALL,Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical,
 1,J6,THROTTLE (servo),Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,
+1,J7,USB-C,Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal,GCT USB4105-GF-A
 1,L1,22u Isat>2.5A,Inductor_SMD:L_Bourns_SRR1260,SRR1260-220M
 6,Q1 Q2 Q3 Q4 Q5 Q6,BSC009NE2LS5,BLDC-3P25:Infineon_PG-TDSON-8,BSC009NE2LS5ATMA1
 1,R1,47k 1%,Resistor_SMD:R_0603_1608Metric,
@@ -44,8 +45,11 @@ Qty,References,Value,Footprint,MPN / spec
 4,R36 R39 R40 R47,1k,Resistor_SMD:R_0603_1608Metric,
 1,R48,2.2k,Resistor_SMD:R_0603_1608Metric,
 3,R50 R53 R56,3.3k 1%,Resistor_SMD:R_0603_1608Metric,
+2,R58 R59,5.1k,Resistor_SMD:R_0603_1608Metric,
+2,R60 R61,0R,Resistor_SMD:R_0603_1608Metric,27R if the module has no USB series resistors
 1,TH1,10k B3950,Resistor_SMD:R_0603_1608Metric,NCP18XH103F03RB
 15,TP1 TP2 TP3 TP4 TP5 TP6 TP7 TP8 TP9 TP10 TP11 TP12 TP13 TP14 TP15,Test point loop,TestPoint:TestPoint_Keystone_5000-5004_Miniature,Keystone 5000 (red) / 5001 (black for GND)
 1,U1,DRV8302DCA,BLDC-3P25:TI_HTSSOP-56-1EP_6.1x14mm_P0.5mm_DCA,DRV8302DCAR
-1,U2,RP2350-Core-A,,
+1,U2,RP2350-Core-A,BLDC-3P25:SpotPear_RP2350-Core-A_Castellated,
 1,U3,LM339,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm,LM339DR
+1,U4,USBLC6-2SC6,Package_TO_SOT_SMD:SOT-23-6,USBLC6-2SC6

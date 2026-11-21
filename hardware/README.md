@@ -7,7 +7,7 @@ Three-phase brushless ESC for a **3S LiPo (9.0–12.6 V)**, designed for
 |----------------|---------------------------------------------------------|
 | Gate driver    | TI DRV8302 (HTSSOP-56 DCA), integrated 5 V / 1.5 A buck |
 | Power MOSFETs  | 6 × Infineon BSC009NE2LS5 (25 V, 0.9 mΩ, PG-TDSON-8)    |
-| MCU            | SpotPear RP2350-Core-A castellated module               |
+| MCU            | SpotPear RP2350-Core-A castellated module + USB-C port on the ESC |
 | Current sense  | 3 × 1 mΩ low-side shunts, 2 measured (phases A and B)   |
 | Rotor position | Hall sensors **or** sensorless BEMF (LM339, solder jumpers) |
 
@@ -20,10 +20,10 @@ Three-phase brushless ESC for a **3S LiPo (9.0–12.6 V)**, designed for
 | File | Content |
 |---|---|
 | `BLDC-3P25.kicad_pro` | Project |
-| `BLDC-3P25.kicad_sch` | Complete schematic (A1, one sheet, 140 parts + 4 solder jumpers) |
+| `BLDC-3P25.kicad_sch` | Complete schematic (A1, one sheet, 148 parts + 4 solder jumpers) |
 | `BLDC-3P25.kicad_pcb` | Board — **layout not started** |
 | `BLDC-3P25.kicad_sym` | Project symbols (drawn for this project) |
-| `BLDC-3P25.pretty/`   | Project footprints: `Infineon_PG-TDSON-8`, `TI_HTSSOP-56-1EP_6.1x14mm_P0.5mm_DCA` |
+| `BLDC-3P25.pretty/`   | Project footprints: `Infineon_PG-TDSON-8`, `TI_HTSSOP-56-1EP_6.1x14mm_P0.5mm_DCA`, `SpotPear_RP2350-Core-A_Castellated` (default), `SpotPear_RP2350-Core-A_THT` (pin headers) |
 | `BLDC-3P25_BOM.csv`   | Bill of materials grouped by value |
 
 Every other footprint comes from the standard KiCad libraries.
@@ -61,12 +61,37 @@ buck, see TI SLVSB56). Check it on the bench with a load step.
 | GP7 | DC_CAL | GP27 (ADC1) | ISENSE_B |
 | GP8 | nFAULT | GP28 (ADC2) | VBUS_SENSE |
 | GP9 | nOCTW | GP29 (ADC3) | TEMP (NTC 10 k) |
-| GP10 | PWRGD | 5V / 3V3 | from buck via SS14 / module LDO output |
+| GP10 | PWRGD | 5V / 3V3 | buck **or** USB VBUS via two SS14 / module LDO output |
+| U+ / U− | USB D+ / D− to J7 (USB-C) | | |
 
-Symbol pin numbers follow the module edge counter-clockwise from the
-top-left pad (silkscreen side, photo orientation): 1 = GP29, 2 = 3V3,
-3 = 5V, 4 = U−, 5 = U+, 6 = GND, 7–12 = GP0–GP5, 13–19 = GP6–GP12,
-20–22 = GP13–GP15, 23–25 = GP26–GP28.
+### Module footprint
+
+From the SpotPear dimension drawing: module 17.78 × 20.32 mm, all pads on a
+2.54 mm grid, 1.27 mm from the edges. Top view (components up):
+
+```
+          GND  U+  U-  5V  3V3  GP29
+   (LED)  [6] [5] [4] [3] [2]  [1]
+GP0  [7]                       [25] GP28
+GP1  [8]                       [24] GP27
+GP2  [9]                       [23] GP26
+GP3  [10]                      [22] GP15
+GP4  [11]                      [21] GP14
+GP5  [12]                      [20] GP13
+     [13] [14] [15] [16] [17] [18] [19]
+     GP6  GP7  GP8  GP9  GP10 GP11 GP12
+```
+
+- `SpotPear_RP2350-Core-A_Castellated` (assigned): SMD pads reaching 0.9 mm
+  outside the module edge for the solder fillet. Keep the area under the
+  module free of exposed copper and vias.
+- `SpotPear_RP2350-Core-A_THT`: 1.0 mm holes for pin headers. Use it with
+  female sockets to make the module removable (handy for students).
+
+**The module has no USB connector**: J7 (USB-C on the ESC) is the
+programming port. Press BOOT on the module while plugging USB to enter the
+UF2 bootloader. R60/R61 are 0 Ω; fit 27 Ω only if the module has no USB
+series resistors of its own.
 
 ## Solder jumpers (open by default)
 
@@ -93,11 +118,9 @@ is bulky, and the fuse protects the wiring as well as the board.
 
 ## Before layout / ordering
 
-- [ ] **Draw the RP2350-Core-A footprint** from the SpotPear outline drawing
-      (not available yet: the footprint field is empty).
 - [ ] Run ERC in KiCad and annotate if you add parts.
-- [ ] Check the project footprints against the datasheets
-      (`Infineon_PG-TDSON-8`, `TI_HTSSOP-56…DCA`).
+- [ ] Print the layout 1:1 and lay the real parts on it, especially the
+      project footprints (MOSFET, DRV8302, RP2350-Core-A).
 - [ ] Layout: Kelvin traces SP/SN to each shunt, AGND joined to GND at the
       DRV8302 PowerPAD only, 10 µF + 100 nF next to each half-bridge,
       wide copper pours for VBAT / phases / GND, NTC next to the low-side FETs.
