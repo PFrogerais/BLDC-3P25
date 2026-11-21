@@ -1,0 +1,4 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "BLDC-3P25") (type "KiCad") (uri "${KIPRJMOD}/BLDC-3P25.kicad_sym") (options "") (descr "BLDC-3P25 project symbols"))
+)

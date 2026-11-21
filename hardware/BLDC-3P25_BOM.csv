@@ -1,0 +1,44 @@
+Qty,References,Value,Footprint,MPN / spec
+2,C1 C2,470u/25V low-ESR,Capacitor_SMD:CP_Elec_10x10.5,
+6,C3 C6 C8 C24 C28 C32,100n/50V,Capacitor_SMD:C_0603_1608Metric,
+4,C4 C13 C17 C36,100n,Capacitor_SMD:C_0603_1608Metric,
+2,C5 C7,4.7u/25V,Capacitor_SMD:C_0805_2012Metric,
+1,C9,2.2u/25V,Capacitor_SMD:C_0805_2012Metric,
+1,C10,22n/50V,Capacitor_SMD:C_0603_1608Metric,
+2,C11 C12,1u/16V,Capacitor_SMD:C_0603_1608Metric,
+4,C14 C21 C25 C29,100n/25V,Capacitor_SMD:C_0603_1608Metric,
+2,C15 C16,22u/16V X7R,Capacitor_SMD:C_1206_3216Metric,
+1,C18,4.7n,Capacitor_SMD:C_0603_1608Metric,
+1,C19,12p,Capacitor_SMD:C_0603_1608Metric,
+1,C20,10n,Capacitor_SMD:C_0603_1608Metric,
+6,C22 C23 C26 C27 C30 C31,10u/25V X7R,Capacitor_SMD:C_1206_3216Metric,
+3,C33 C34 C35,1n,Capacitor_SMD:C_0603_1608Metric,
+1,D1,SMBJ15A,Diode_SMD:D_SMB,SMBJ15A
+1,D2,B240A,Diode_SMD:D_SMA,B240A-13-F
+1,D3,SS14,Diode_SMD:D_SMA,SS14
+1,J1,XT60 (battery),Connector_AMASS:AMASS_XT60-M_1x02_P7.20mm_Vertical,XT60PW-M or XT60-M
+1,J2,MOTOR_A,Connector_Wire:SolderWire-1.5sqmm_1x01_D1.7mm_OD3.9mm,
+1,J3,MOTOR_B,Connector_Wire:SolderWire-1.5sqmm_1x01_D1.7mm_OD3.9mm,
+1,J4,MOTOR_C,Connector_Wire:SolderWire-1.5sqmm_1x01_D1.7mm_OD3.9mm,
+1,J5,HALL,Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical,
+1,J6,THROTTLE (servo),Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,
+1,L1,22u Isat>2.5A,Inductor_SMD:L_Bourns_SRR1260,SRR1260-220M
+6,Q1 Q2 Q3 Q4 Q5 Q6,BSC009NE2LS5,BLDC-3P25:Infineon_PG-TDSON-8,BSC009NE2LS5ATMA1
+1,R1,47k 1%,Resistor_SMD:R_0603_1608Metric,
+1,R2,10k 1%,Resistor_SMD:R_0603_1608Metric,
+1,R3,1M,Resistor_SMD:R_0603_1608Metric,
+8,R4 R5 R6 R7 R11 R12 R13 R37,10k,Resistor_SMD:R_0603_1608Metric,
+1,R8,100k 1%,Resistor_SMD:R_0603_1608Metric,
+1,R9,4.7k 1%,Resistor_SMD:R_0603_1608Metric,
+7,R10 R19 R21 R24 R26 R29 R31,100k,Resistor_SMD:R_0603_1608Metric,
+1,R14,53.6k 1%,Resistor_SMD:R_0603_1608Metric,
+1,R15,10.2k 1%,Resistor_SMD:R_0603_1608Metric,
+1,R16,200k 1%,Resistor_SMD:R_0603_1608Metric,
+1,R17,43.2k,Resistor_SMD:R_0603_1608Metric,
+6,R18 R20 R23 R25 R28 R30,10R,Resistor_SMD:R_0603_1608Metric,
+3,R22 R27 R32,1m 1% 3W,Resistor_SMD:R_2512_6332Metric,2512 1 mOhm 1% >=3 W
+3,R33 R34 R35,4.7k,Resistor_SMD:R_0603_1608Metric,
+1,R36,1k,Resistor_SMD:R_0603_1608Metric,
+1,TH1,10k B3950,Resistor_SMD:R_0603_1608Metric,NCP18XH103F03RB
+1,U1,DRV8302DCA,BLDC-3P25:TI_HTSSOP-56-1EP_6.1x14mm_P0.5mm_DCA,DRV8302DCAR
+1,U2,RP2350-Core-A,,
