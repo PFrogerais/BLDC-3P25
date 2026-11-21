@@ -19,6 +19,8 @@ Three-phase brushless ESC, KiCad 10 project.
 
 ## Datasheets
 
+Local copies in [`../datasheet/`](../datasheet/). Latest versions online:
+
 - [DRV8302](https://www.ti.com/lit/ds/symlink/drv8302.pdf)
 - [BSC009NE2LS5](https://www.infineon.com/cms/en/product/power/mosfet/n-channel/bsc009ne2ls5/)
 
