@@ -1,0 +1,15 @@
+# KiCad backups and local history
+*-backups/
+.history/
+*.bak
+*.lck
+_autosave-*
+fp-info-cache
+
+# KiCad per-user local settings
+*.kicad_prl
+
+# Fabrication outputs (regenerate from the board file)
+hardware/fab/
+*.gbr
+*.drl
