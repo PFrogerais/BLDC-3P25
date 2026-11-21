@@ -1,6 +1,7 @@
 # BLDC-3P25 — Hardware
 
-Three-phase brushless ESC for a **3S LiPo (9.0–12.6 V)**, KiCad 9/10 project.
+Three-phase brushless ESC for a **3S LiPo (9.0–12.6 V)**, designed for
+**30 A continuous** motor current. KiCad 9/10 project, schematic rev B.
 
 | Function       | Part                                                    |
 |----------------|---------------------------------------------------------|
@@ -8,6 +9,7 @@ Three-phase brushless ESC for a **3S LiPo (9.0–12.6 V)**, KiCad 9/10 project.
 | Power MOSFETs  | 6 × Infineon BSC009NE2LS5 (25 V, 0.9 mΩ, PG-TDSON-8)    |
 | MCU            | SpotPear RP2350-Core-A castellated module               |
 | Current sense  | 3 × 1 mΩ low-side shunts, 2 measured (phases A and B)   |
+| Rotor position | Hall sensors **or** sensorless BEMF (LM339, solder jumpers) |
 
 > **Supply range:** the DRV8302 needs PVDD ≥ 8 V and the MOSFETs are rated
 > 25 V. 3S is the only LiPo configuration that fits both. Do **not** use 2S
@@ -18,7 +20,7 @@ Three-phase brushless ESC for a **3S LiPo (9.0–12.6 V)**, KiCad 9/10 project.
 | File | Content |
 |---|---|
 | `BLDC-3P25.kicad_pro` | Project |
-| `BLDC-3P25.kicad_sch` | Complete schematic (A2, one sheet, 92 parts) |
+| `BLDC-3P25.kicad_sch` | Complete schematic (A1, one sheet, 140 parts + 4 solder jumpers) |
 | `BLDC-3P25.kicad_pcb` | Board — **layout not started** |
 | `BLDC-3P25.kicad_sym` | Project symbols (drawn for this project) |
 | `BLDC-3P25.pretty/`   | Project footprints: `Infineon_PG-TDSON-8`, `TI_HTSSOP-56-1EP_6.1x14mm_P0.5mm_DCA` |
@@ -38,6 +40,10 @@ Every other footprint comes from the standard KiCad libraries.
 | Shunt amplifiers | 1 mΩ, GAIN high (40 V/V), REF = 3V3 | ±41 A full scale, 0 A = 1.65 V |
 | VDS overcurrent | OC_ADJ = 0.148 V, M_OC latch | trips at ≈ 165 A cold / 115 A hot — short-circuit only |
 | Dead time | R<sub>DTC</sub> 10 kΩ | ≈ 80 ns |
+| Bulk capacitors | 4 × 330 µF / 25 V polymer (≥ 4 A rms each) + 6 × 10 µF X7R | input ripple ≈ I/2 = 15 A rms at 30 A |
+| ADC protection | 1 kΩ + 1 nF + BAT54S clamp on ISENSE_A/B | SO outputs can exceed 3.3 V; fc ≈ 160 kHz |
+| BEMF dividers | 10 kΩ / 3.3 kΩ, 4.7 nF, virtual neutral 3 × 10 kΩ | 12.6 V → 3.13 V, fc ≈ 17 kHz |
+| Throttle input | 1 kΩ series + 10 kΩ pull-down | unplugged cable reads 0 = motor stopped |
 | VBUS sense | 47 kΩ / 10 kΩ | 2.21 V at 12.6 V, full scale 18.8 V |
 | TVS | SMBJ15A | standoff 15 V, clamp 24.4 V < 25 V |
 
@@ -61,6 +67,29 @@ Symbol pin numbers follow the module edge counter-clockwise from the
 top-left pad (silkscreen side, photo orientation): 1 = GP29, 2 = 3V3,
 3 = 5V, 4 = U−, 5 = U+, 6 = GND, 7–12 = GP0–GP5, 13–19 = GP6–GP12,
 20–22 = GP13–GP15, 23–25 = GP26–GP28.
+
+## Solder jumpers (open by default)
+
+| Jumper | Close when… |
+|---|---|
+| JP1 `BEC 5V` | the RC receiver on J6 must be powered by the ESC. Leave open with a self-powered source (Arduino on USB, servo tester on battery). |
+| JP2–JP4 `SENSORLESS A/B/C` | the motor has **no** Hall sensors. Unplug J5 first: comparator and Hall outputs share the same lines. |
+
+## Firmware rules imposed by the hardware
+
+- Keep GP0–GP6 low until **PWRGD** is high (the 10 kΩ pull-downs hold the
+  driver inputs low during reset and when the board runs from USB only).
+- Stop regenerative braking when VBUS_SENSE exceeds **14 V**: the TVS
+  clamps at 24.4 V, the MOSFETs are rated 25 V.
+- Limit motor current from ISENSE_A/B (the VDS protection only catches
+  hard short circuits).
+- Sensorless mode: blank the comparator outputs for a few µs after each PWM
+  edge.
+
+## Wiring
+
+Fit an **inline 40 A blade fuse** on the battery lead: a 30 A board fuse
+is bulky, and the fuse protects the wiring as well as the board.
 
 ## Before layout / ordering
 
